@@ -1,0 +1,26 @@
+if [ ! -d "$HOME/.asdf" ];then
+  git clone --depth 1 https://github.com/asdf-vm/asdf.git ~/.asdf
+fi
+
+~/.asdf/bin/asdf plugin add elixir
+~/.asdf/bin/asdf plugin add erlang
+~/.asdf/bin/asdf plugin add rust
+~/.asdf/bin/asdf plugin add nodejs
+~/.asdf/bin/asdf plugin add python
+
+~/.asdf/bin/asdf install erlang latest
+~/.asdf/bin/asdf global erlang latest
+
+~/.asdf/bin/asdf install elixir latest
+~/.asdf/bin/asdf global elixir latest
+
+~/.asdf/bin/asdf install rust latest
+~/.asdf/bin/asdf global rust latest
+
+~/.asdf/bin/asdf install nodejs latest
+~/.asdf/bin/asdf global nodejs latest
+
+~/.asdf/bin/asdf install python latest
+~/.asdf/bin/asdf global python latest
+
+~/.asdf/bin/asdf reshim

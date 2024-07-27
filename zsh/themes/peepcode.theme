@@ -1,0 +1,50 @@
+#
+# Based on Geoffrey Grosenbach's peepcode zsh theme from
+# https://github.com/topfunky/zsh-simple
+#
+
+git_repo_path() {
+  git rev-parse --git-dir 2>/dev/null
+}
+
+git_commit_id() {
+  git rev-parse --short HEAD 2>/dev/null
+}
+
+git_mode() {
+  if [[ -e "$repo_path/BISECT_LOG" ]]; then
+    echo "+bisect"
+  elif [[ -e "$repo_path/MERGE_HEAD" ]]; then
+    echo "+merge"
+  elif [[ -e "$repo_path/rebase" || -e "$repo_path/rebase-apply" || -e "$repo_path/rebase-merge" || -e "$repo_path/../.dotest" ]]; then
+    echo "+rebase"
+  fi
+}
+
+git_dirty() {
+  if [[ "$repo_path" != '.' && `git ls-files -m` != "" ]]; then
+    echo "%B%F{yellow}✗"
+  fi
+}
+
+function current_branch() {
+  local ref
+  ref=$(git symbolic-ref --quiet HEAD 2> /dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return  # no git repo.
+    ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  echo ${ref#refs/heads/}
+}
+
+git_prompt() {
+  local cb=$(current_branch)
+  if [ -n "$cb" ]; then
+    local repo_path=$(git_repo_path)
+    echo "%F{#181825}█%K{#181825}%B%F{yellow}$cb %b%F{white}$(git_commit_id)%f$(git_mode) $(git_dirty)%F{#181825}██"
+  fi
+}
+
+PROMPT='%K{#585B70}%B%(?:%f:%F{#f9e2af})  %c%k%F{#585B70}█ %f%k%b'
+RPROMPT='$(git_prompt)%f%k%b'

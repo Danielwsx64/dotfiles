@@ -1,0 +1,21 @@
+{
+  "repo-examples": "https://github.com/rafamadriz/friendly-snippets",
+  "name": "custom-snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "elixir"
+        ],
+        "path": "elixir.json"
+      },
+      {
+        "language": [
+          "typescript",
+          "typescriptreact"
+        ],
+        "path": "typescript.json"
+      }
+    ]
+  }
+}

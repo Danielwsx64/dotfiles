@@ -1,0 +1,6 @@
+sudo apt install -y \
+  build-essential pkg-config autoconf clang libssl-dev libreadline-dev \
+  zlib1g-dev libyaml-dev libncurses5-dev libffi-dev libgdbm-dev libjemalloc2 \
+  libvips imagemagick libmagickwand-dev libpq-dev postgresql-client postgresql-client-common \
+  apt-transport-https ca-certificates software-properties-common dconf-cli \
+  automake cmake libncurses-dev libxslt-dev libtool unixodbc-dev 

@@ -1,0 +1,100 @@
+setopt promptsubst
+
+export WORKSPACE='workspace'
+
+# load our own completion functions
+fpath=(~/.dotfiles/zsh/completion /usr/local/share/zsh/site-functions $fpath)
+
+# load custom executable functions
+for function in ~/.dotfiles/zsh/functions/*; do
+  source $function
+done
+
+TERM=screen-256color
+
+# makes color constants available
+autoload -U colors
+colors
+
+# enable colored output from ls, etc
+export CLICOLOR=1
+
+# Hooks
+autoload -U add-zsh-hook
+
+kitty_title_update() {
+  if [[ -n $KITTY_INSTALLATION_DIR ]]; then
+    local current_dir=$PWD
+    if [[ $current_dir == $HOME ]]; then
+      current_dir="~"
+    else
+      current_dir=${current_dir##*/}
+    fi
+    command nohup kitten @ set-tab-title $current_dir >/dev/null 2>&1
+  fi
+}
+
+kitty_title_update
+chpwd_functions+=(kitty_title_update)
+
+# history settings
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt APPEND_HISTORY
+
+HISTFILE=~/.zhistory
+HISTSIZE=4096
+SAVEHIST=4096
+HISTORY_IGNORE="(clear|ls |cd |q |fp|gc |gnb )*"
+
+# awesome cd movements from zshkit
+setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
+DIRSTACKSIZE=5
+
+# Enable extended globbing
+setopt extendedglob
+
+# Allow [ or ] whereever you want
+unsetopt nomatch
+
+# vi mode
+bindkey -v
+bindkey "^F" vi-cmd-mode
+#bindkey jj vi-cmd-mode
+
+# handy keybindings
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^K" kill-line
+bindkey "^R" history-incremental-search-backward
+bindkey "^P" history-search-backward
+bindkey "^Y" accept-and-hold
+bindkey "^N" insert-last-word
+
+set -o nobeep # no annoying beeps
+
+# aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
+
+# Peepcode theme to make your terminal simple and beautiful
+source ~/.dotfiles/zsh/themes/peepcode.theme
+
+# Zsh syntax highlight
+source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 2097152"
+
+# bat teme
+export FZF_PREVIEW_PREVIEW_BAT_THEME='ansi'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
+. $HOME/.asdf/asdf.sh
+
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+
+# initialise completions with ZSH's compinit
+autoload -Uz compinit
+compinit
+
+export EDITOR=nvim

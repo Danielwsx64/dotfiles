@@ -1,0 +1,17 @@
+font_name="JetBrainsMono Nerd Font"
+url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+file_type="ttf"
+file_name="${font_name/ Nerd Font/}"
+
+if ! $(fc-list | grep -i "$font_name" >/dev/null); then
+  cd /tmp
+  wget -O "$file_name.zip" "$url"
+  unzip "$file_name.zip" -d "$file_name"
+  mkdir -p ~/.local/share/fonts
+  cp "$file_name"/*."$file_type" ~/.local/share/fonts
+  rm -rf "$file_name.zip" "$file_name"
+  fc-cache
+  cd -
+fi
+
+gsettings set org.gnome.desktop.interface monospace-font-name "$font_name 10"

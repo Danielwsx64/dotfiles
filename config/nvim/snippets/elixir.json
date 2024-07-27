@@ -1,0 +1,96 @@
+{
+  "IO.inspect": {
+    "prefix": "ins",
+    "body": "IO.inspect($0)"
+  },
+  "IO.inspect with label": {
+    "prefix": "insl",
+    "body": "IO.inspect($1, label: \"$0\")"
+  },
+  "if .. do .. end": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition} do",
+      "  $0",
+      "end"
+    ]
+  },
+  "if .. do: .. else:": {
+    "prefix": "ife:",
+    "body": "if ${1:condition}, do: $2, else: $0"
+  },
+  "cond": {
+    "prefix": "cond",
+    "body": [
+      "cond do",
+      "  $1 -> ",
+      "  $0",
+      "end"
+    ]
+  },
+  "case": {
+    "prefix": "case",
+    "body": [
+      "case $1 do",
+      "  $2 -> ",
+      "    $0",
+      "end"
+    ]
+  },
+  "for": {
+    "prefix": "for",
+    "body": [
+      "for ${1:item} <- ${2:items} do",
+      "  $0",
+      "end"
+    ]
+  },
+  "test": {
+    "prefix": "test",
+    "body": [
+      "test \"${1:name}\" do",
+      "  $0",
+      "end"
+    ]
+  },
+  "des": {
+    "prefix": "desc",
+    "body": [
+      "describe \"${1:test group subject}\" do",
+      "  $0",
+      "end"
+    ]
+  },
+  "map": {
+    "prefix": "m",
+    "body": "%{$0}"
+  },
+  "arrow char": {
+    "prefix": "v",
+    "body": "-> $0"
+  },
+  "double arrow char": {
+    "prefix": "vv",
+    "body": "=> $0"
+  },
+  "pipe char": {
+    "prefix": "p",
+    "body": "|> $0"
+  },
+  "pipe into each": {
+    "prefix": "pe",
+    "body": "|> Enum.each($0)"
+  },
+  "pipe into map": {
+    "prefix": "pm",
+    "body": "|> Enum.map($0)"
+  },
+  "pipe into filter": {
+    "prefix": "pf",
+    "body": "|> Enum.filter($0)"
+  },
+  "pipe into reduce": {
+    "prefix": "pr",
+    "body": "|> Enum.reduce(${1:acc}, fn ${2}, ${3:acc} -> $0 end)"
+  }
+}

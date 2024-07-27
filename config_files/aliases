@@ -1,0 +1,63 @@
+# global
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+
+alias ws='cd ~/workspace'
+
+# PS
+alias psa="ps aux"
+alias psg="ps aux | grep "
+alias psr='ps aux | grep ruby'
+
+# Show human friendly numbers and colors
+alias df='df -h'
+alias du='du -h -d 2'
+
+alias la='ll -a'
+alias ll='ls -alh --color=auto'
+alias ls='ls --color=auto'
+
+# mimic vim functions
+alias q='exit'
+
+# Git Aliases
+alias gs='git status'
+alias gi='vim .gitignore'
+alias gc='git commit'
+alias gcm='git cm'
+alias gca='git ca'
+alias gco='git checkout'
+alias ga='git add -A'
+alias gam='git commit --amend'
+alias gl='git log'
+alias gd='git diff'
+alias gpl='git pull'
+alias gp='git push'
+alias gprune='git branch | grep -v main | xargs git branch -D && git remote prune origin'
+alias gdh='git diff HEAD'
+
+#push current branch
+alias gpsh='git push -u origin `git rev-parse --abbrev-ref HEAD`'
+
+# Common shell functions
+alias less='less -r'
+alias tf='tail -f'
+alias cl='clear'
+
+# Zippin
+alias gz='tar -zcvf'
+
+
+
+# Elixir
+alias credo='mix credo list'
+alias credos='mix credo list --strict'
+alias ectos='mix ecto.drop && mix ecto.create && mix ecto.migrate'
+alias ectos_test='MIX_ENV=test mix ecto.drop && MIX_ENV=test mix ecto.create && MIX_ENV=test mix ecto.migrate'
+alias server='iex -S mix phx.server'
+alias siex='iex -S mix'
+
+alias jsprettier="npx prettier --config .prettierrc.json --write ./src/**/*.{js,json,md}"
+
+alias vi='nvim'
