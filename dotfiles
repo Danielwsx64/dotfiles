@@ -21,6 +21,9 @@ function install_pkgs(){
 }
 
 case "$1" in
+  --link|-l)
+    link_config
+    ;;
   --install|-i)
     prepare
     link_config

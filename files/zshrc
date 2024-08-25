@@ -3,10 +3,10 @@ setopt promptsubst
 export WORKSPACE='workspace'
 
 # load our own completion functions
-fpath=(~/.dotfiles/zsh/completion /usr/local/share/zsh/site-functions $fpath)
+fpath=(~/.config/zsh/completion /usr/local/share/zsh/site-functions $fpath)
 
 # load custom executable functions
-for function in ~/.dotfiles/zsh/functions/*; do
+for function in ~/.config/zsh/functions/*; do
   source $function
 done
 
@@ -77,7 +77,7 @@ set -o nobeep # no annoying beeps
 [[ -f ~/.aliases ]] && source ~/.aliases
 
 # Peepcode theme to make your terminal simple and beautiful
-source ~/.dotfiles/zsh/themes/peepcode.theme
+source ~/.config/zsh/themes/peepcode.theme
 
 # Zsh syntax highlight
 source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
