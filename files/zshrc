@@ -99,5 +99,6 @@ compinit
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.secrets ] && source ~/.secrets
 
 export EDITOR=nvim

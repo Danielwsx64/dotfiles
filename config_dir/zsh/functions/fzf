@@ -53,14 +53,14 @@ ff() {
   [ -n "$file" ] && vim "$file"
 }
 
-fd() {
-  local dir
-  dir=$(find ${1:-*} -path '*/\.*' -prune \
-    -o -type d -print 2> /dev/null | fzf +m) &&
-    cd "$dir"
-  cd "$dir"
-  ls --color -a
-}
+#fd() {
+#  local dir
+#  dir=$(find ${1:-*} -path '*/\.*' -prune \
+#    -o -type d -print 2> /dev/null | fzf +m) &&
+#    cd "$dir"
+#  cd "$dir"
+#  ls --color -a
+#}
 
 fkill() {
   ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9}

@@ -49,8 +49,6 @@ alias cl='clear'
 # Zippin
 alias gz='tar -zcvf'
 
-
-
 # Elixir
 alias credo='mix credo list'
 alias credos='mix credo list --strict'
@@ -61,4 +59,6 @@ alias siex='iex -S mix'
 
 alias jsprettier="npx prettier --config .prettierrc.json --write ./src/**/*.{js,json,md}"
 
+# simplify apps
 alias vi='nvim'
+alias fd='fdfind'
