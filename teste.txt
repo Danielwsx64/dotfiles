@@ -1,0 +1,25 @@
+#!/bin/bash
+
+function prepare(){
+  for file in ./files/*; do
+    echo "$HOME/.$(basename $file)"
+  done
+
+  for dir in ./config_dir/*; do
+    echo "$HOME/.config/$(basename $dir)"
+  done
+}
+
+case "$1" in
+  --install|-i)
+    prepare
+    ;;
+
+  *)
+    echo
+    echo "Uso: $0 OPTIONS"
+    echo
+    echo 'Options:'
+    echo ' -i, --install       Install dotfiles.'
+    ;;
+esac

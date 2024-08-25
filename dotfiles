@@ -7,20 +7,18 @@ function prepare(){
 }
 
 function link_config() {
-  for file in ~/.dotfiles/config_files/*; do
+  for file in ~/.dotfiles/files/*; do
     ln -nfs "$file" "$HOME/.$(basename $file)"
   done
 
-  for file in ~/.dotfiles/config/*; do
-    ln -nfs "$file" "$HOME/.config/$(basename $file)"
+  for dir in ~/.dotfiles/config_dir/*; do
+    ln -nfs "$dir" "$HOME/.config/$(basename $dir)"
   done
 }
-
 
 function install_pkgs(){
   for installer in ~/.dotfiles/install/*; do source $installer; done
 }
-
 
 case "$1" in
   --install|-i)
@@ -38,6 +36,27 @@ case "$1" in
     prepare
     git clone https://github.com/Danielwsx64/dotfiles.git ~/.dotfiles
     ~/.dotfiles/dotfiles --after-download
+    ;;
+
+  --test-colorsd)
+    for x in {0..8}; do 
+      for i in {30..37}; do 
+        for a in {40..47}; do 
+          echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "
+        done
+        echo
+      done
+    done
+
+    echo -e "\033[0mNC (No color)"
+    echo -e "\033[1;37mWHITE\t\033[0;30mBLACK"
+    echo -e "\033[0;34mBLUE\t\033[1;34mLIGHT_BLUE"
+    echo -e "\033[0;32mGREEN\t\033[1;32mLIGHT_GREEN"
+    echo -e "\033[0;36mCYAN\t\033[1;36mLIGHT_CYAN"
+    echo -e "\033[0;31mRED\t\033[1;31mLIGHT_RED"
+    echo -e "\033[0;35mPURPLE\t\033[1;35mLIGHT_PURPLE"
+    echo -e "\033[0;33mYELLOW\t\033[1;33mLIGHT_YELLOW"
+    echo -e "\033[1;30mGRAY\t\033[0;37mLIGHT_GRAY"
     ;;
 
   *)
