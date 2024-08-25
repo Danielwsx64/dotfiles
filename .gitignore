@@ -1,1 +1,3 @@
 config_dir/ulauncher/ext_preferences/com.github.kbialek.ulauncher-bitwarden.db
+config_dir/pgcli/history
+config_dir/pgcli/log
