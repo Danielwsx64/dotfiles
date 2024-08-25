@@ -1,7 +1,7 @@
 fe() {
   local file
   local current
-  tempfile=/tmp/current_project.tmp
+  tempfile=/tmp/$(whoami)_current_project.tmp
   touch $tempfile
   current=$(cat $tempfile)/
   file=$(find ~/"$current" -name .git -prune -o -name .rvm -prune -o -name .rbenv\
@@ -13,7 +13,7 @@ fw() {
   local dir
   namespace=$WORKSPACE
   dir=$(ls -d ~/$namespace/* | fzf +m)
-  echo $namespace/$(basename $dir) > /tmp/current_project.tmp
+  echo $namespace/$(basename $dir) > /tmp/$(whoami)_current_project.tmp
   cd "$dir"
   ls --color -a
 }
@@ -25,7 +25,7 @@ fp() {
 
   project_dir=$namespace/$project
 
-  echo $project_dir > /tmp/current_project.tmp
+  echo $project_dir > /tmp/$(whoami)_current_project.tmp
 
   cd ~/$project_dir
   ls --color -a
@@ -35,9 +35,9 @@ p(){
   namespace=$WORKSPACE
   if [ "$1" == "." ] ; then
     cd $1
-    echo $namespace/$(basename $(pwd)) > /tmp/current_project.tmp
+    echo $namespace/$(basename $(pwd)) > /tmp/$(whoami)_current_project.tmp
   else
-    current=$(cat /tmp/current_project.tmp)
+    current=$(cat /tmp/$(whoami)_current_project.tmp)
     cd ~/$current
   fi
 }
@@ -45,7 +45,7 @@ p(){
 ff() {
   local file
   local current
-  tempfile=/tmp/current_project.tmp
+  tempfile=/tmp/$(whoami)_current_project.tmp
   touch $tempfile
   current=$(cat $tempfile)/
   file=$(find . -name .git -prune -o -name .rvm -prune -o -name .rbenv\

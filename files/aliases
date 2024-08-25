@@ -4,6 +4,7 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 
 alias ws='cd ~/workspace'
+alias dot='cd ~/.dotfiles'
 
 # PS
 alias psa="ps aux"

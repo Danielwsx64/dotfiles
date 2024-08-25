@@ -4,10 +4,10 @@ from kittens.tui.handler import result_handler
 from kitty.key_encoding import KeyEvent, parse_shortcut
 
 
-def is_window_vim(window, vim_id):
+def should_send_keys_to_window(window):
+    cmd_regex = "n?vim|fzf"
     fp = window.child.foreground_processes
-    return any(re.search(vim_id, p['cmdline'][0] if len(p['cmdline']) else '', re.I) for p in fp)
-
+    return any(re.search(cmd_regex, p['cmdline'][0] if len(p['cmdline']) else '', re.I) for p in fp)
 
 def encode_key_mapping(window, key_mapping):
     mods, key = parse_shortcut(key_mapping)
@@ -35,7 +35,6 @@ def resize_direction(direction):
     return "wider"
 
 def run_kitty_command(boss, command, direction):
-
     if command == "move":
         boss.active_tab.neighboring_window(direction)
         return
@@ -52,13 +51,12 @@ def handle_result(args, result, target_window_id, boss):
     command = args[1]
     direction = args[2]
     key_mapping = args[3]
-    vim_id = "n?vim"
 
     window = boss.window_id_map.get(target_window_id)
 
     if window is None:
         return
-    if is_window_vim(window, vim_id):
+    if should_send_keys_to_window(window):
         for keymap in key_mapping.split(">"):
             encoded = encode_key_mapping(window, keymap)
             window.write_to_child(encoded)
