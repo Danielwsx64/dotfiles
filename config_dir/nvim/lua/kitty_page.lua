@@ -16,20 +16,22 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 
 	vim.api.nvim_buf_set_keymap(term_buf, "n", "q", "<Cmd>q<CR>", {})
 	vim.api.nvim_buf_set_keymap(term_buf, "n", "<ESC>", "<Cmd>q<CR>", {})
+	vim.api.nvim_buf_set_keymap(term_buf, "v", "<enter>", "y :q!<CR>", {})
 
 	local group = vim.api.nvim_create_augroup("kitty+page", {})
 
 	local setCursor = function()
-		vim.api.nvim_feedkeys(tostring(INPUT_LINE_NUMBER) .. [[ggzt]], "n", true)
+		-- vim.api.nvim_feedkeys(tostring(INPUT_LINE_NUMBER) .. [[ggzt]], "n", true)
+		vim.api.nvim_feedkeys([[Gzb]], "n", true)
 
-		local line = vim.api.nvim_buf_line_count(term_buf)
-
-		if CURSOR_LINE <= line then
-			line = CURSOR_LINE
-		end
-		vim.api.nvim_feedkeys(tostring(line - 1) .. [[j]], "n", true)
-		vim.api.nvim_feedkeys([[0]], "n", true)
-		vim.api.nvim_feedkeys(tostring(CURSOR_COLUMN - 1) .. [[l]], "n", true)
+		-- local line = vim.api.nvim_buf_line_count(term_buf)
+		--
+		-- if CURSOR_LINE <= line then
+		-- 	line = CURSOR_LINE
+		-- end
+		-- vim.api.nvim_feedkeys(tostring(line - 1) .. [[j]], "n", true)
+		-- vim.api.nvim_feedkeys([[0]], "n", true)
+		-- vim.api.nvim_feedkeys(tostring(CURSOR_COLUMN - 1) .. [[l]], "n", true)
 	end
 
 	vim.api.nvim_create_autocmd("ModeChanged", {
@@ -52,18 +54,21 @@ return function(INPUT_LINE_NUMBER, CURSOR_LINE, CURSOR_COLUMN)
 			local current_win = vim.fn.win_getid()
 
 			for _, line in ipairs(vim.api.nvim_buf_get_lines(ev.buf, 0, -2, false)) do
-				print(vim.inspect(line))
-
 				if vim.startswith(line, "[m]133;A") then
-					vim.api.nvim_chan_send(term_io, "xx")
+					local command = line:match("(.-)")
+
+					if command then
+						vim.api.nvim_chan_send(term_io, "████████" .. command)
+						vim.api.nvim_chan_send(term_io, "\n")
+					end
 				elseif line and line ~= "" then
-					vim.api.nvim_chan_send(term_io, line .. "\r\n")
+					vim.api.nvim_chan_send(term_io, line)
+					vim.api.nvim_chan_send(term_io, "\n")
 				end
 			end
 
 			vim.api.nvim_win_set_buf(current_win, term_buf)
 			vim.api.nvim_buf_delete(ev.buf, { force = true })
-
 			vim.schedule(setCursor)
 		end,
 	})

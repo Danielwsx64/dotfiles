@@ -42,7 +42,7 @@ git_prompt() {
   local cb=$(current_branch)
   if [ -n "$cb" ]; then
     local repo_path=$(git_repo_path)
-    echo "%F{#181825}█%K{#181825}%B%F{yellow}$cb %b%F{white}$(git_commit_id)%f$(git_mode) $(git_dirty)%F{#181825}██"
+    echo "%F{#181825}█%K{#181825}%B%F{yellow}$cb %b%F{white}$(git_commit_id)%f$(git_mode) $(git_dirty)%F{#181825}"
   fi
 }
 

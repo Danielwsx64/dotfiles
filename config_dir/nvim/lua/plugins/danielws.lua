@@ -1,1 +1,1 @@
-return { "Danielwsx64/danielws.vim", dev = false, opts = { tmux_runner = { auto_attach = false } } }
+return { "Danielwsx64/danielws.vim", dev = true, opts = { tmux_runner = { auto_attach = false } } }

@@ -26,15 +26,38 @@ local function lsp_status_component()
 	return ""
 end
 
+local function command_get()
+	return require("noice").api.status.command.get()
+end
+
+local function command_has()
+	return require("noice").api.status.command.has()
+end
+
+local function mode_get()
+	return require("noice").api.status.mode.get()
+end
+
+local function mode_has()
+	return require("noice").api.status.mode.has()
+end
+
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-lua/lsp-status.nvim" },
+	dependencies = { "nvim-lua/lsp-status.nvim", "folke/noice.nvim" },
 	opts = {
 		options = {
 			globalstatus = true,
 			theme = "catppuccin",
 		},
-		sections = { lualine_c = { lsp_status_component, { "filename", path = 1 } } },
+		sections = {
+			lualine_c = { lsp_status_component, { "filename", path = 1 } },
+
+			lualine_x = {
+				{ command_get, cond = command_has, color = { fg = "#ff9e64" } },
+				{ mode_get, cond = mode_has, color = { fg = "#ff9e64" } },
+			},
+		},
 		tabline = {
 			lualine_a = {
 				{

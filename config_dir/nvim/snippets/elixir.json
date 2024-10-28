@@ -61,6 +61,10 @@
       "end"
     ]
   },
+  "handy anonymous function": {
+    "prefix": "f",
+    "body": "&(&1.$0)"
+  },
   "map": {
     "prefix": "m",
     "body": "%{$0}"

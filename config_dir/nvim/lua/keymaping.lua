@@ -126,6 +126,14 @@ end
 function M.register_lsp_keys(client, bufnr)
 	local telescope = require("telescope.builtin")
 
+	local function diagnostic_goto_next()
+		vim.diagnostic.jump({ count = 1 })
+	end
+
+	local function diagnostic_goto_prev()
+		vim.diagnostic.jump({ count = 1 })
+	end
+
 	local leader_l_keys = {
 		mode = { "n" },
 		remap = false,
@@ -136,8 +144,8 @@ function M.register_lsp_keys(client, bufnr)
 		{ "<leader>la", vim.lsp.buf.code_action, desc = "[L]SP Code [A]ction" },
 		{ "<leader>ld", vim.diagnostic.open_float, desc = "[L]ine [D]iagnostics" },
 		{ "<leader>lk", vim.lsp.buf.hover, desc = "LSP symbol info" },
-		{ "<leader>ln", vim.diagnostic.goto_next, desc = "[G]oto [N]ext diagnostic line" },
-		{ "<leader>lp", vim.diagnostic.goto_prev, desc = "[G]oto [P]rev diagnostic line" },
+		{ "<leader>ln", diagnostic_goto_next, desc = "[G]oto [N]ext diagnostic line" },
+		{ "<leader>lp", diagnostic_goto_prev, desc = "[G]oto [P]rev diagnostic line" },
 		{ "<leader>ls", telescope.lsp_document_symbols, desc = "[L]SP Document [S]ymbols" },
 	}
 
@@ -352,6 +360,7 @@ function M.register()
 		{ "<leader>wv", "<CMD>vsplit<CR>", desc = "Split vertical" },
 		{ "<leader>ww", "<CMD>update<CR>", desc = "Save current buffer" },
 		{ "<leader>wx", "<CMD>x<CR>", desc = "Save & Quit" },
+		{ "<leader>wz", "<CMD>ZenMode<CR>", desc = "ZenMode" },
 
 		{ "<M-h>", "<CMD>Multiplex resize left<CR>", desc = "Resize windows left" },
 		{ "<M-j>", "<CMD>Multiplex resize down<CR>", desc = "Resize windows down" },
