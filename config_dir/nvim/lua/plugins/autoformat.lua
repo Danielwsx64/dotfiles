@@ -17,6 +17,7 @@ return {
 			typescriptreact = { "prettier" },
 			typescrip = { "prettier" },
 			elixir = { "mix" },
+			sql = { "pg_format" },
 			-- Conform can also run multiple formatters sequentially
 			-- python = { "isort", "black" },
 			--

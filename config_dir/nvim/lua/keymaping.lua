@@ -163,12 +163,14 @@ function M.register_lsp_keys(client, bufnr)
 
 		{ "g", group = "Goto" },
 		{ "gD", vim.lsp.buf.declaration, desc = "[G]oto [D]eclaration" },
-		{ "gI", telescope.lsp_implementations, desc = "[G]oto [I]mplementation" },
-		{ "gd", telescope.lsp_definitions, desc = "[G]oto [D]efinition" },
+		{ "gI", vim.lsp.buf.implementation, desc = "[G]oto [I]mplementation" },
+		-- { "gI", telescope.lsp_implementations, desc = "[G]oto [I]mplementation" },
+		{ "gd", vim.lsp.buf.definition, desc = "[G]oto [D]efinition" },
+		-- { "gd", telescope.lsp_definitions, desc = "[G]oto [D]efinition" },
 		{ "gh", vim.lsp.buf.hover, desc = "[G]o [H]over Documentation" },
 		{ "gr", telescope.lsp_references, desc = "[G]oto [R]eferences" },
 		{ "gs", vim.lsp.buf.signature_help, desc = "[G]oto [S]ignature Help" },
-		{ "gt", telescope.lsp_type_definitions, desc = "[G]oto [T]ype Definition" },
+		{ "gT", telescope.lsp_type_definitions, desc = "[G]oto [T]ype Definition" },
 	})
 end
 
@@ -256,19 +258,21 @@ function M.register()
 		{ "<leader>ef", "<CMD>NvimTreeFindFile<CR>", desc = "Open current buffer" },
 		{ "<leader>eq", "<CMD>NvimTreeClose<CR>", desc = "Close" },
 
-		{ "<leader>f", group = "Find or Format" },
+		{ "<leader>f", group = "Find" },
 		{ "<leader>fS", telescope.grep_string, desc = "Search word under cursor in workspace" },
 		{ "<leader>fa", ":Danielws ag ", desc = "Search with ag" },
 		{ "<leader>fc", "<CMD>HopCamelCase<CR>", desc = "-- HOP: Find for cammel case" },
-		{ "<leader>ff", "<CMD>ElixirDev fn_shorthand<CR>", desc = "Elixir switch fn syntax" },
+		{ "<leader>ff", "<CMD>Telescope elixir_dev public_functions<CR>", desc = "Module public functions" },
 		{ "<leader>fg", telescope.live_grep, desc = "Live Grep" },
 		{ "<leader>fh", telescope.search_history, desc = "Show the search history" },
-		{ "<leader>fk", "<CMD>ElixirDev switch_keys<CR>", desc = "Elixir switch map key syntax" },
 		{ "<leader>fl", "<CMD>HopLineStart<CR>", desc = "-- HOP: Find for line" },
-		{ "<leader>fp", "<CMD>ElixirDev pipelize<CR>", desc = "Elixir turns into pipe" },
 		{ "<leader>fs", telescope.current_buffer_fuzzy_find, desc = "Current Buffer" },
-		{ "<leader>ft", "<CMD>ElixirDev jump_to_test<CR>", desc = "Test file or back" },
 		{ "<leader>fw", "<CMD>HopWord<CR>", desc = "-- HOP: Find for word" },
+
+		{ "<leader>c", group = "Change sintax" },
+		{ "<leader>cf", "<CMD>ElixirDev fn_shorthand<CR>", desc = "Elixir switch fn syntax" },
+		{ "<leader>ck", "<CMD>ElixirDev switch_keys<CR>", desc = "Elixir switch map key syntax" },
+		{ "<leader>cp", "<CMD>ElixirDev pipelize<CR>", desc = "Elixir turns into pipe" },
 
 		{ "<leader>g", group = "Git" },
 		{ "<leader>gB", "<CMD>lua require('gitsigns').toggle_current_line_blame()<CR>", desc = "Buffer blame" },
@@ -369,6 +373,9 @@ function M.register()
 
 		{ "<leader>y", group = "Yank", nowait = false, remap = false },
 		{ "<leader>yt", "<CMD>%yank<CR>", desc = "Yank all buffer", nowait = false, remap = false },
+		{ "<leader>ym", "<CMD>ElixirDev yank_module_name<CR>", desc = "Yank module name" },
+
+		{ "gt", "<CMD>ElixirDev jump_to_test<CR>", desc = "Test file or back" },
 	}
 
 	-- Better escape using jk in insert and terminal mode

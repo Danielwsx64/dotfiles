@@ -62,15 +62,8 @@ return {
 					},
 				},
 			},
-			pickers = {
-				-- Default configuration for builtin pickers goes here:
-				-- picker_name = {
-				--   picker_config_key = value,
-				--   ...
-				-- }
-				-- Now the picker_config_key will be applied every time you call this
-				-- builtin picker
-			},
+			preview = false,
+			pickers = {},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
@@ -81,6 +74,7 @@ return {
 		-- Enable Telescope extensions if they are installed
 		local extensions = {
 			-- "danielws",
+			"elixir_dev",
 			"notify",
 			"luasnip",
 			"fzf",

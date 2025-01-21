@@ -18,6 +18,7 @@ return { -- Highlight, edit, and navigate code
 			"toml",
 			"vim",
 			"vimdoc",
+			"terraform",
 		},
 
 		-- Install parsers synchronously (only applied to `ensure_installed`)
@@ -33,7 +34,7 @@ return { -- Highlight, edit, and navigate code
 			-- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
 			-- the name of the parser)
 			-- list of language that will be disabled
-			disable = {},
+			disable = { "text" },
 
 			-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
 			--  If you are experiencing weird indenting issues, add the language to

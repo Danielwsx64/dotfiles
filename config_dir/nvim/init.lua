@@ -91,3 +91,23 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", { dev = { path = "~/workspace" }, root = vim.fn.stdpath("data") .. "/danielws_lazy" })
+
+-- Workaround to add highlight to telescope vim_grep_preview
+require("filetypes").add_file_types()
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "TelescopePreviewerLoaded",
+	callback = function(args)
+		if args.data.filetype == "elixir" then
+			local parser = vim.treesitter.get_parser(args.buf, "elixir")
+			parser:parse() -- Parse the buffer with Treesitter
+			vim.treesitter.highlighter.new(parser)
+		end
+
+		if args.data.filetype == "terraform" then
+			local parser = vim.treesitter.get_parser(args.buf, "terraform")
+			parser:parse() -- Parse the buffer with Treesitter
+			vim.treesitter.highlighter.new(parser)
+		end
+	end,
+})
