@@ -1,1 +1,3 @@
+# add keyboard shortcut to command 'flameshot gui'
+
 sudo apt install flameshot -y
