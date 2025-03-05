@@ -6,5 +6,9 @@
       "$0"
     ],
     "description": "Log to the console"
+  },
+  "double arrow char": {
+    "prefix": "vv",
+    "body": "=> $0"
   }
 }

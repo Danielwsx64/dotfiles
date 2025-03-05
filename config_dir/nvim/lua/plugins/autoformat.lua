@@ -2,7 +2,7 @@ return {
 	"stevearc/conform.nvim",
 	lazy = false,
 	opts = {
-		notify_on_error = false,
+		notify_on_error = true,
 		format_on_save = function(bufnr)
 			local disabled_languages = { c = true, cpp = true }
 
@@ -13,9 +13,9 @@ return {
 		end,
 		formatters_by_ft = {
 			lua = { "stylua" },
-			javascript = { "prettier" },
-			typescriptreact = { "prettier" },
-			typescrip = { "prettier" },
+			javascript = { "prettier", lsp_format = "fallback" },
+			typescriptreact = { "prettier", lsp_format = "fallback" },
+			typescript = { "prettier", lsp_format = "fallback" },
 			elixir = { "mix" },
 			sql = { "pg_format" },
 			-- Conform can also run multiple formatters sequentially

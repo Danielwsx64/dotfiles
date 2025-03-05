@@ -241,7 +241,6 @@ function M.register()
 		{ "<leader><space>h", telescope.command_history, desc = "Commands history" },
 		{ "<leader><space>j", telescope.jumplist, desc = "Jump list" },
 		{ "<leader><space>m", telescope.marks, desc = "Marks" },
-		{ "<leader><space>n", "<CMD>Telescope notify<CR>", desc = "Notifications" },
 		{ "<leader><space>u", "<CMD>UndotreeToggle<CR>", desc = "Toggle Undo History" },
 		{ "<leader><space>y", "<CMD>Telescope yank_history<CR>", desc = "Yank History" },
 		{ "<leader><space>z", telescope.builtin, desc = "Sholl all pickers" },
@@ -302,6 +301,14 @@ function M.register()
 
 		{ "<leader>l", group = "LSP commands" },
 		{ "<leader>lf", telescope.diagnostics, desc = "List diagnostics" },
+
+		{ "<leader>l", group = "Notifications" },
+		{ "<leader>nn", "<CMD>Telescope notify<CR>", desc = "Show notifications" },
+		{
+			"<leader>nd",
+			"<CMD>lua require('notify').dismiss({silent = true, pending = true})<CR>",
+			desc = "Close notifications",
+		},
 
 		{ "<leader>q", group = "Quit" },
 		{ "<leader>qF", "<CMD>q!<CR>", desc = "Force" },
