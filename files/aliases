@@ -3,7 +3,8 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 
-alias ws='cd ~/workspace'
+alias ws='cd ~/$WORKSPACE'
+alias hk='cd ~/$HK_WORKSPACE'
 alias dot='cd ~/.dotfiles'
 
 # PS
@@ -62,3 +63,6 @@ alias jsprettier="npx prettier --config .prettierrc.json --write ./src/**/*.{js,
 # simplify apps
 alias vi='nvim'
 alias fd='fdfind'
+
+alias uno_deploy='arduino-cli compile --fqbn arduino:avr:uno --port /dev/ttyACM0 --upload'
+alias mega_deploy='arduino-cli compile --fqbn arduino:avr:mega --port /dev/ttyACM0 --upload'

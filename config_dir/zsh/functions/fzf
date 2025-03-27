@@ -18,6 +18,19 @@ fw() {
   ls --color -a
 }
 
+fh() {
+  local dir
+  namespace=$HK_WORKSPACE
+  project=$(ls -d1 ~/$namespace/* | xargs -n 1 basename | fzf +m)
+
+  project_dir=$namespace/$project
+
+  echo $project_dir > /tmp/$(whoami)_current_project.tmp
+
+  cd ~/$project_dir
+  ls --color -a
+}
+
 fp() {
   local dir
   namespace=$WORKSPACE

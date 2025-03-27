@@ -1,6 +1,7 @@
 setopt promptsubst
 
 export WORKSPACE='workspace'
+export HK_WORKSPACE='hacking_ws'
 
 # load our own completion functions
 fpath=(~/.config/zsh/completion /usr/local/share/zsh/site-functions $fpath)
@@ -106,5 +107,7 @@ compinit
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.secrets ] && source ~/.secrets
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+
+export PATH="$HOME/.bin:$PATH"
 
 export EDITOR=nvim
