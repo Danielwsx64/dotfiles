@@ -3,6 +3,10 @@
     "prefix": "ins",
     "body": "IO.inspect($0)"
   },
+  "IO.puts": {
+    "prefix": "puts",
+    "body": "IO.puts($0)"
+  },
   "IO.inspect with label": {
     "prefix": "insl",
     "body": "IO.inspect($1, label: \"$0\")"
@@ -62,6 +66,10 @@
     ]
   },
   "handy anonymous function": {
+    "prefix": "fn",
+    "body": "fn $0 -> $1 end"
+  },
+  "handy short anonymous function": {
     "prefix": "f",
     "body": "&(&1.$0)"
   },

@@ -10,5 +10,9 @@
   "double arrow char": {
     "prefix": "vv",
     "body": "=> $0"
+  },
+  "handy short anonymous function": {
+    "prefix": "f",
+    "body": "($1) => $0"
   }
 }

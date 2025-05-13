@@ -4,7 +4,11 @@ return {
 		vim.notify = require("notify")
 
 		require("notify").setup({
+			level = 2,
+			timeout = 3000,
 			background_colour = "#1e2030",
+			minimum_width = 50,
+			stages = "fade_in_slide_out",
 			fps = 60,
 			icons = {
 				DEBUG = "",
@@ -13,16 +17,12 @@ return {
 				TRACE = "✎",
 				WARN = "",
 			},
-			level = 2,
-			minimum_width = 50,
 			render = "wrapped-compact",
-			stages = "fade_in_slide_out",
 			time_formats = {
 				notification = "%T",
 				notification_history = "%FT%T",
 			},
-			timeout = 3000,
-			top_down = true,
+			top_down = false,
 		})
 	end,
 }

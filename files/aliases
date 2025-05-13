@@ -66,3 +66,6 @@ alias fd='fdfind'
 
 alias uno_deploy='arduino-cli compile --fqbn arduino:avr:uno --port /dev/ttyACM0 --upload'
 alias mega_deploy='arduino-cli compile --fqbn arduino:avr:mega --port /dev/ttyACM0 --upload'
+alias smartphone='bash -c "/usr/bin/scrcpy &"'
+
+alias icat="kitten icat"

@@ -10,7 +10,6 @@ autoload -U +X bashcompinit && bashcompinit
 autoload -U +X compinit && compinit
 complete -C '/usr/local/bin/aws_completer' aws
 
-
 # load custom executable functions
 for function in ~/.config/zsh/functions/*; do
   source $function
@@ -94,14 +93,11 @@ export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_byte
 export FZF_PREVIEW_PREVIEW_BAT_THEME='ansi'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
-. $HOME/.asdf/asdf.sh
-
-# append completions to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
+export ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
 # initialise completions with ZSH's compinit
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -1,26 +1,30 @@
-if [ ! -d "$HOME/.asdf" ];then
-  git clone --depth 1 https://github.com/asdf-vm/asdf.git ~/.asdf
-fi
+last_release_link=$(curl -L -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/asdf-vm/asdf/releases | jq -r '.[1].assets[] | select(.name | test("linux-amd64.tar.gz$")) | .browser_download_url')
+curl -L -o asdf.tar.gz "$last_release_link"
+mkdir -p $HOME/.bin
+tar -xzf asdf.tar.gz -C $HOME/.bin
+rm asdf.tar.gz
 
-~/.asdf/bin/asdf plugin add elixir
-~/.asdf/bin/asdf plugin add erlang
-~/.asdf/bin/asdf plugin add rust
-~/.asdf/bin/asdf plugin add nodejs
-~/.asdf/bin/asdf plugin add python
+~/.bin/asdf completion zsh >> "$HOME/.config/zsh/completion/_asdf"
 
-~/.asdf/bin/asdf install erlang latest
-~/.asdf/bin/asdf global erlang latest
+~/.bin/asdf plugin add elixir
+~/.bin/asdf plugin add erlang
+~/.bin/asdf plugin add rust
+~/.bin/asdf plugin add nodejs
+~/.bin/asdf plugin add python
 
-~/.asdf/bin/asdf install elixir latest
-~/.asdf/bin/asdf global elixir latest
+~/.bin/asdf install erlang latest
+~/.bin/asdf global erlang latest
 
-~/.asdf/bin/asdf install rust latest
-~/.asdf/bin/asdf global rust latest
+~/.bin/asdf install elixir latest
+~/.bin/asdf global elixir latest
 
-~/.asdf/bin/asdf install nodejs latest
-~/.asdf/bin/asdf global nodejs latest
+~/.bin/asdf install rust latest
+~/.bin/asdf global rust latest
 
-~/.asdf/bin/asdf install python latest
-~/.asdf/bin/asdf global python latest
+~/.bin/asdf install nodejs latest
+~/.bin/asdf global nodejs latest
 
-~/.asdf/bin/asdf reshim
+~/.bin/asdf install python latest
+~/.bin/asdf global python latest
+
+~/.bin/asdf reshim
