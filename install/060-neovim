@@ -1,1 +1,2 @@
-sudo apt install -y nvim
+# I want to compile it
+#sudo apt install -y nvim
