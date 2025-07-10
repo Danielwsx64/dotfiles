@@ -99,6 +99,7 @@ export PATH="$ASDF_DATA_DIR/shims:$PATH"
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
+complete -C '/usr/local/bin/aws_completer' aws
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.secrets ] && source ~/.secrets

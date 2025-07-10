@@ -1,0 +1,1227 @@
+#compdef ham
+
+autoload -U is-at-least
+
+_ham() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_ham_commands" \
+"*::: :->ham" \
+&& ret=0
+    case $state in
+    (ham)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-command-$line[1]:"
+        case $line[1] in
+            (configure)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(secrets)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_ham__secrets_commands" \
+"*::: :->secrets" \
+&& ret=0
+
+    case $state in
+    (secrets)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-secrets-command-$line[1]:"
+        case $line[1] in
+            (terraform)
+_arguments "${_arguments_options[@]}" \
+'-c+[Context of the secrets]: : ' \
+'-t+[Path to toml file with secrets information]: : ' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" \
+'-e+[Extension of the secret file]: :(json key)' \
+'--extension=[Extension of the secret file]: :(json key)' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::context -- Context of the secret:' \
+'::name -- Name of the secret:' \
+&& ret=0
+;;
+(put)
+_arguments "${_arguments_options[@]}" \
+'-e+[Extension of the secret file]: :(json key)' \
+'--extension=[Extension of the secret file]: :(json key)' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::context -- Context of the secret:' \
+'::name -- Name of the secret:' \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" \
+'-e+[Extension of the secret file]: :(json key)' \
+'--extension=[Extension of the secret file]: :(json key)' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::context -- Context of the secret:' \
+'::name -- Name of the secret:' \
+&& ret=0
+;;
+(export)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+':template -- Path to the JSON template file:' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+'-f[Put the list of secrets in a fuzzy selector to get the secret]' \
+'--fuzzy_get[Put the list of secrets in a fuzzy selector to get the secret]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(totp)
+_arguments "${_arguments_options[@]}" \
+'-s+[The selector for the otpauth uri inside the secret]: : ' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::context -- Context of the secret:' \
+'::name -- Name of the secret:' \
+&& ret=0
+;;
+(grant-access)
+_arguments "${_arguments_options[@]}" \
+'-d+[How long to grant IAM user access to secret. Examples\: 1d, 12h, 15m]: : ' \
+'-e+[Extension of the secret file]: :(json key)' \
+'--extension=[Extension of the secret file]: :(json key)' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::context -- Context of the Secret:' \
+'::name -- Name of the secret:' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__secrets__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-secrets-help-command-$line[1]:"
+        case $line[1] in
+            (terraform)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(put)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(export)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(totp)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(grant-access)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(update)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(users)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_ham__users_commands" \
+"*::: :->users" \
+&& ret=0
+
+    case $state in
+    (users)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-users-command-$line[1]:"
+        case $line[1] in
+            (groups)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_ham__users__groups_commands" \
+"*::: :->groups" \
+&& ret=0
+
+    case $state in
+    (groups)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-users-groups-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" \
+'-u+[Show groups for an specific user name]:USER_NAME: ' \
+'--user=[Show groups for an specific user name]:USER_NAME: ' \
+'-n[Print only groups names]' \
+'--only-names[Print only groups names]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__users__groups__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-users-groups-help-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+'-g+[Filter users by the group name]:GROUP: ' \
+'--group=[Filter users by the group name]:GROUP: ' \
+'-n[Print only user names]' \
+'--only-names[Print only user names]' \
+'-G[Show user groups]' \
+'--show-groups[Show user groups]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__users__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-users-help-command-$line[1]:"
+        case $line[1] in
+            (groups)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__users__help__groups_commands" \
+"*::: :->groups" \
+&& ret=0
+
+    case $state in
+    (groups)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-users-help-groups-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(hermes)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_ham__hermes_commands" \
+"*::: :->hermes" \
+&& ret=0
+
+    case $state in
+    (hermes)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-hermes-command-$line[1]:"
+        case $line[1] in
+            (status)
+_arguments "${_arguments_options[@]}" \
+'-e+[Hermes EB environment]: :(prod staging)' \
+'--environment=[Hermes EB environment]: :(prod staging)' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(remote)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+'::environment -- Hermes EB environment:(prod staging)' \
+&& ret=0
+;;
+(psql)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+'::environment -- Hermes EB environment:(prod staging)' \
+&& ret=0
+;;
+(local)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+'::environment -- Hermes EB environment:(prod staging)' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__hermes__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-hermes-help-command-$line[1]:"
+        case $line[1] in
+            (status)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remote)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(psql)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(local)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(ec2)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_ham__ec2_commands" \
+"*::: :->ec2" \
+&& ret=0
+
+    case $state in
+    (ec2)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-ec2-command-$line[1]:"
+        case $line[1] in
+            (instances)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(ssh)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__ec2__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-ec2-help-command-$line[1]:"
+        case $line[1] in
+            (instances)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(ssh)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(policies)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_ham__policies_commands" \
+"*::: :->policies" \
+&& ret=0
+
+    case $state in
+    (policies)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-policies-command-$line[1]:"
+        case $line[1] in
+            (delete-expired)
+_arguments "${_arguments_options[@]}" \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__policies__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-policies-help-command-$line[1]:"
+        case $line[1] in
+            (delete-expired)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-help-command-$line[1]:"
+        case $line[1] in
+            (configure)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(secrets)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__help__secrets_commands" \
+"*::: :->secrets" \
+&& ret=0
+
+    case $state in
+    (secrets)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-help-secrets-command-$line[1]:"
+        case $line[1] in
+            (terraform)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(put)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(export)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(totp)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(grant-access)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(update)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(users)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__help__users_commands" \
+"*::: :->users" \
+&& ret=0
+
+    case $state in
+    (users)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-help-users-command-$line[1]:"
+        case $line[1] in
+            (groups)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__help__users__groups_commands" \
+"*::: :->groups" \
+&& ret=0
+
+    case $state in
+    (groups)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-help-users-groups-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(hermes)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__help__hermes_commands" \
+"*::: :->hermes" \
+&& ret=0
+
+    case $state in
+    (hermes)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-help-hermes-command-$line[1]:"
+        case $line[1] in
+            (status)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remote)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(psql)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(local)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(ec2)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__help__ec2_commands" \
+"*::: :->ec2" \
+&& ret=0
+
+    case $state in
+    (ec2)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-help-ec2-command-$line[1]:"
+        case $line[1] in
+            (instances)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(ssh)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(policies)
+_arguments "${_arguments_options[@]}" \
+":: :_ham__help__policies_commands" \
+"*::: :->policies" \
+&& ret=0
+
+    case $state in
+    (policies)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ham-help-policies-command-$line[1]:"
+        case $line[1] in
+            (delete-expired)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_ham_commands] )) ||
+_ham_commands() {
+    local commands; commands=(
+'configure:Starts ham configuration setup' \
+'secrets:Secrets operations' \
+'update:Check for new versions and update - Requires GitHub credentials' \
+'users:Users operations' \
+'hermes:Hermes API operations' \
+'ec2:EC2 instances operations' \
+'policies:AWS Policies operations' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham commands' commands "$@"
+}
+(( $+functions[_ham__configure_commands] )) ||
+_ham__configure_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham configure commands' commands "$@"
+}
+(( $+functions[_ham__help__configure_commands] )) ||
+_ham__help__configure_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help configure commands' commands "$@"
+}
+(( $+functions[_ham__help__secrets__delete_commands] )) ||
+_ham__help__secrets__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help secrets delete commands' commands "$@"
+}
+(( $+functions[_ham__secrets__delete_commands] )) ||
+_ham__secrets__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets delete commands' commands "$@"
+}
+(( $+functions[_ham__secrets__help__delete_commands] )) ||
+_ham__secrets__help__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets help delete commands' commands "$@"
+}
+(( $+functions[_ham__help__policies__delete-expired_commands] )) ||
+_ham__help__policies__delete-expired_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help policies delete-expired commands' commands "$@"
+}
+(( $+functions[_ham__policies__delete-expired_commands] )) ||
+_ham__policies__delete-expired_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham policies delete-expired commands' commands "$@"
+}
+(( $+functions[_ham__policies__help__delete-expired_commands] )) ||
+_ham__policies__help__delete-expired_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham policies help delete-expired commands' commands "$@"
+}
+(( $+functions[_ham__ec2_commands] )) ||
+_ham__ec2_commands() {
+    local commands; commands=(
+'instances:List instances' \
+'ssh:Connect to a remote EC2 instance' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham ec2 commands' commands "$@"
+}
+(( $+functions[_ham__help__ec2_commands] )) ||
+_ham__help__ec2_commands() {
+    local commands; commands=(
+'instances:List instances' \
+'ssh:Connect to a remote EC2 instance' \
+    )
+    _describe -t commands 'ham help ec2 commands' commands "$@"
+}
+(( $+functions[_ham__help__secrets__export_commands] )) ||
+_ham__help__secrets__export_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help secrets export commands' commands "$@"
+}
+(( $+functions[_ham__secrets__export_commands] )) ||
+_ham__secrets__export_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets export commands' commands "$@"
+}
+(( $+functions[_ham__secrets__help__export_commands] )) ||
+_ham__secrets__help__export_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets help export commands' commands "$@"
+}
+(( $+functions[_ham__help__secrets__get_commands] )) ||
+_ham__help__secrets__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help secrets get commands' commands "$@"
+}
+(( $+functions[_ham__secrets__get_commands] )) ||
+_ham__secrets__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets get commands' commands "$@"
+}
+(( $+functions[_ham__secrets__help__get_commands] )) ||
+_ham__secrets__help__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets help get commands' commands "$@"
+}
+(( $+functions[_ham__help__secrets__grant-access_commands] )) ||
+_ham__help__secrets__grant-access_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help secrets grant-access commands' commands "$@"
+}
+(( $+functions[_ham__secrets__grant-access_commands] )) ||
+_ham__secrets__grant-access_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets grant-access commands' commands "$@"
+}
+(( $+functions[_ham__secrets__help__grant-access_commands] )) ||
+_ham__secrets__help__grant-access_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets help grant-access commands' commands "$@"
+}
+(( $+functions[_ham__help__users__groups_commands] )) ||
+_ham__help__users__groups_commands() {
+    local commands; commands=(
+'list:List all groups' \
+    )
+    _describe -t commands 'ham help users groups commands' commands "$@"
+}
+(( $+functions[_ham__users__groups_commands] )) ||
+_ham__users__groups_commands() {
+    local commands; commands=(
+'list:List all groups' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham users groups commands' commands "$@"
+}
+(( $+functions[_ham__users__help__groups_commands] )) ||
+_ham__users__help__groups_commands() {
+    local commands; commands=(
+'list:List all groups' \
+    )
+    _describe -t commands 'ham users help groups commands' commands "$@"
+}
+(( $+functions[_ham__ec2__help_commands] )) ||
+_ham__ec2__help_commands() {
+    local commands; commands=(
+'instances:List instances' \
+'ssh:Connect to a remote EC2 instance' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham ec2 help commands' commands "$@"
+}
+(( $+functions[_ham__ec2__help__help_commands] )) ||
+_ham__ec2__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham ec2 help help commands' commands "$@"
+}
+(( $+functions[_ham__help_commands] )) ||
+_ham__help_commands() {
+    local commands; commands=(
+'configure:Starts ham configuration setup' \
+'secrets:Secrets operations' \
+'update:Check for new versions and update - Requires GitHub credentials' \
+'users:Users operations' \
+'hermes:Hermes API operations' \
+'ec2:EC2 instances operations' \
+'policies:AWS Policies operations' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham help commands' commands "$@"
+}
+(( $+functions[_ham__help__help_commands] )) ||
+_ham__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help help commands' commands "$@"
+}
+(( $+functions[_ham__hermes__help_commands] )) ||
+_ham__hermes__help_commands() {
+    local commands; commands=(
+'status:Show Hermes elastic bean stalk status' \
+'remote:Connect to remote IEx' \
+'psql:Open a psql shell to the database' \
+'local:Runs a Hermes image version locally' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham hermes help commands' commands "$@"
+}
+(( $+functions[_ham__hermes__help__help_commands] )) ||
+_ham__hermes__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham hermes help help commands' commands "$@"
+}
+(( $+functions[_ham__policies__help_commands] )) ||
+_ham__policies__help_commands() {
+    local commands; commands=(
+'delete-expired:Delete expired temporary policies' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham policies help commands' commands "$@"
+}
+(( $+functions[_ham__policies__help__help_commands] )) ||
+_ham__policies__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham policies help help commands' commands "$@"
+}
+(( $+functions[_ham__secrets__help_commands] )) ||
+_ham__secrets__help_commands() {
+    local commands; commands=(
+'terraform:Export a json with variables to be used with terraform by a toml template file' \
+'get:Gets a secret' \
+'put:Puts a secret' \
+'delete:Deletes a secret' \
+'export:Generates a file with the secrets export based on the template file' \
+'list:List secrets' \
+'totp:Generate Time-Based One-Time Password based on the otpauth uri' \
+'grant-access:Grant an IAM user access to a specified secret' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham secrets help commands' commands "$@"
+}
+(( $+functions[_ham__secrets__help__help_commands] )) ||
+_ham__secrets__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets help help commands' commands "$@"
+}
+(( $+functions[_ham__users__groups__help_commands] )) ||
+_ham__users__groups__help_commands() {
+    local commands; commands=(
+'list:List all groups' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham users groups help commands' commands "$@"
+}
+(( $+functions[_ham__users__groups__help__help_commands] )) ||
+_ham__users__groups__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham users groups help help commands' commands "$@"
+}
+(( $+functions[_ham__users__help_commands] )) ||
+_ham__users__help_commands() {
+    local commands; commands=(
+'groups:Groups operations' \
+'list:List all users' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham users help commands' commands "$@"
+}
+(( $+functions[_ham__users__help__help_commands] )) ||
+_ham__users__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham users help help commands' commands "$@"
+}
+(( $+functions[_ham__help__hermes_commands] )) ||
+_ham__help__hermes_commands() {
+    local commands; commands=(
+'status:Show Hermes elastic bean stalk status' \
+'remote:Connect to remote IEx' \
+'psql:Open a psql shell to the database' \
+'local:Runs a Hermes image version locally' \
+    )
+    _describe -t commands 'ham help hermes commands' commands "$@"
+}
+(( $+functions[_ham__hermes_commands] )) ||
+_ham__hermes_commands() {
+    local commands; commands=(
+'status:Show Hermes elastic bean stalk status' \
+'remote:Connect to remote IEx' \
+'psql:Open a psql shell to the database' \
+'local:Runs a Hermes image version locally' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham hermes commands' commands "$@"
+}
+(( $+functions[_ham__ec2__help__instances_commands] )) ||
+_ham__ec2__help__instances_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham ec2 help instances commands' commands "$@"
+}
+(( $+functions[_ham__ec2__instances_commands] )) ||
+_ham__ec2__instances_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham ec2 instances commands' commands "$@"
+}
+(( $+functions[_ham__help__ec2__instances_commands] )) ||
+_ham__help__ec2__instances_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help ec2 instances commands' commands "$@"
+}
+(( $+functions[_ham__help__secrets__list_commands] )) ||
+_ham__help__secrets__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help secrets list commands' commands "$@"
+}
+(( $+functions[_ham__help__users__groups__list_commands] )) ||
+_ham__help__users__groups__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help users groups list commands' commands "$@"
+}
+(( $+functions[_ham__help__users__list_commands] )) ||
+_ham__help__users__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help users list commands' commands "$@"
+}
+(( $+functions[_ham__secrets__help__list_commands] )) ||
+_ham__secrets__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets help list commands' commands "$@"
+}
+(( $+functions[_ham__secrets__list_commands] )) ||
+_ham__secrets__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets list commands' commands "$@"
+}
+(( $+functions[_ham__users__groups__help__list_commands] )) ||
+_ham__users__groups__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham users groups help list commands' commands "$@"
+}
+(( $+functions[_ham__users__groups__list_commands] )) ||
+_ham__users__groups__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham users groups list commands' commands "$@"
+}
+(( $+functions[_ham__users__help__groups__list_commands] )) ||
+_ham__users__help__groups__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham users help groups list commands' commands "$@"
+}
+(( $+functions[_ham__users__help__list_commands] )) ||
+_ham__users__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham users help list commands' commands "$@"
+}
+(( $+functions[_ham__users__list_commands] )) ||
+_ham__users__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham users list commands' commands "$@"
+}
+(( $+functions[_ham__help__hermes__local_commands] )) ||
+_ham__help__hermes__local_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help hermes local commands' commands "$@"
+}
+(( $+functions[_ham__hermes__help__local_commands] )) ||
+_ham__hermes__help__local_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham hermes help local commands' commands "$@"
+}
+(( $+functions[_ham__hermes__local_commands] )) ||
+_ham__hermes__local_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham hermes local commands' commands "$@"
+}
+(( $+functions[_ham__help__policies_commands] )) ||
+_ham__help__policies_commands() {
+    local commands; commands=(
+'delete-expired:Delete expired temporary policies' \
+    )
+    _describe -t commands 'ham help policies commands' commands "$@"
+}
+(( $+functions[_ham__policies_commands] )) ||
+_ham__policies_commands() {
+    local commands; commands=(
+'delete-expired:Delete expired temporary policies' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham policies commands' commands "$@"
+}
+(( $+functions[_ham__help__hermes__psql_commands] )) ||
+_ham__help__hermes__psql_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help hermes psql commands' commands "$@"
+}
+(( $+functions[_ham__hermes__help__psql_commands] )) ||
+_ham__hermes__help__psql_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham hermes help psql commands' commands "$@"
+}
+(( $+functions[_ham__hermes__psql_commands] )) ||
+_ham__hermes__psql_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham hermes psql commands' commands "$@"
+}
+(( $+functions[_ham__help__secrets__put_commands] )) ||
+_ham__help__secrets__put_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help secrets put commands' commands "$@"
+}
+(( $+functions[_ham__secrets__help__put_commands] )) ||
+_ham__secrets__help__put_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets help put commands' commands "$@"
+}
+(( $+functions[_ham__secrets__put_commands] )) ||
+_ham__secrets__put_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets put commands' commands "$@"
+}
+(( $+functions[_ham__help__hermes__remote_commands] )) ||
+_ham__help__hermes__remote_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help hermes remote commands' commands "$@"
+}
+(( $+functions[_ham__hermes__help__remote_commands] )) ||
+_ham__hermes__help__remote_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham hermes help remote commands' commands "$@"
+}
+(( $+functions[_ham__hermes__remote_commands] )) ||
+_ham__hermes__remote_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham hermes remote commands' commands "$@"
+}
+(( $+functions[_ham__help__secrets_commands] )) ||
+_ham__help__secrets_commands() {
+    local commands; commands=(
+'terraform:Export a json with variables to be used with terraform by a toml template file' \
+'get:Gets a secret' \
+'put:Puts a secret' \
+'delete:Deletes a secret' \
+'export:Generates a file with the secrets export based on the template file' \
+'list:List secrets' \
+'totp:Generate Time-Based One-Time Password based on the otpauth uri' \
+'grant-access:Grant an IAM user access to a specified secret' \
+    )
+    _describe -t commands 'ham help secrets commands' commands "$@"
+}
+(( $+functions[_ham__secrets_commands] )) ||
+_ham__secrets_commands() {
+    local commands; commands=(
+'terraform:Export a json with variables to be used with terraform by a toml template file' \
+'get:Gets a secret' \
+'put:Puts a secret' \
+'delete:Deletes a secret' \
+'export:Generates a file with the secrets export based on the template file' \
+'list:List secrets' \
+'totp:Generate Time-Based One-Time Password based on the otpauth uri' \
+'grant-access:Grant an IAM user access to a specified secret' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham secrets commands' commands "$@"
+}
+(( $+functions[_ham__ec2__help__ssh_commands] )) ||
+_ham__ec2__help__ssh_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham ec2 help ssh commands' commands "$@"
+}
+(( $+functions[_ham__ec2__ssh_commands] )) ||
+_ham__ec2__ssh_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham ec2 ssh commands' commands "$@"
+}
+(( $+functions[_ham__help__ec2__ssh_commands] )) ||
+_ham__help__ec2__ssh_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help ec2 ssh commands' commands "$@"
+}
+(( $+functions[_ham__help__hermes__status_commands] )) ||
+_ham__help__hermes__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help hermes status commands' commands "$@"
+}
+(( $+functions[_ham__hermes__help__status_commands] )) ||
+_ham__hermes__help__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham hermes help status commands' commands "$@"
+}
+(( $+functions[_ham__hermes__status_commands] )) ||
+_ham__hermes__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham hermes status commands' commands "$@"
+}
+(( $+functions[_ham__help__secrets__terraform_commands] )) ||
+_ham__help__secrets__terraform_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help secrets terraform commands' commands "$@"
+}
+(( $+functions[_ham__secrets__help__terraform_commands] )) ||
+_ham__secrets__help__terraform_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets help terraform commands' commands "$@"
+}
+(( $+functions[_ham__secrets__terraform_commands] )) ||
+_ham__secrets__terraform_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets terraform commands' commands "$@"
+}
+(( $+functions[_ham__help__secrets__totp_commands] )) ||
+_ham__help__secrets__totp_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help secrets totp commands' commands "$@"
+}
+(( $+functions[_ham__secrets__help__totp_commands] )) ||
+_ham__secrets__help__totp_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets help totp commands' commands "$@"
+}
+(( $+functions[_ham__secrets__totp_commands] )) ||
+_ham__secrets__totp_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham secrets totp commands' commands "$@"
+}
+(( $+functions[_ham__help__update_commands] )) ||
+_ham__help__update_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham help update commands' commands "$@"
+}
+(( $+functions[_ham__update_commands] )) ||
+_ham__update_commands() {
+    local commands; commands=()
+    _describe -t commands 'ham update commands' commands "$@"
+}
+(( $+functions[_ham__help__users_commands] )) ||
+_ham__help__users_commands() {
+    local commands; commands=(
+'groups:Groups operations' \
+'list:List all users' \
+    )
+    _describe -t commands 'ham help users commands' commands "$@"
+}
+(( $+functions[_ham__users_commands] )) ||
+_ham__users_commands() {
+    local commands; commands=(
+'groups:Groups operations' \
+'list:List all users' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ham users commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_ham" ]; then
+    _ham "$@"
+else
+    compdef _ham ham
+fi
