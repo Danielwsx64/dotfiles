@@ -51,8 +51,8 @@ alias cl='clear'
 alias gz='tar -zcvf'
 
 # Elixir
-alias credo='mix credo list'
-alias credos='mix credo list --strict'
+alias credo='mix credo list --format oneline'
+alias credos='mix credo list --format oneline --strict'
 alias ectos='mix ecto.drop && mix ecto.create && mix ecto.migrate'
 alias ectos_test='MIX_ENV=test mix ecto.drop && MIX_ENV=test mix ecto.create && MIX_ENV=test mix ecto.migrate'
 alias server='iex -S mix phx.server'

@@ -24,10 +24,10 @@ local fmt = require("luasnip.extras.fmt").fmt
 local function module_name()
 	local module = "Module"
 
-	local status_ok, elixir = pcall(require, "danielws.elixir")
+	local status_ok, elixir_mod = pcall(require, "elixir_dev.module")
 
 	if status_ok then
-		module = elixir.module_name_by_path()
+		module = elixir_mod.module_name_by_path()
 	end
 
 	return sn(nil, { insert(1, module) })
