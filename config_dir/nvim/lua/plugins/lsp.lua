@@ -41,7 +41,7 @@ return {
 			dockerls = {},
 			cssls = {},
 			terraformls = {},
-			elixirls = {},
+			expert = {},
 			html = {},
 			jsonls = {},
 			rust_analyzer = {},
