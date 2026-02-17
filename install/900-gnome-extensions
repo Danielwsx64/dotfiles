@@ -38,6 +38,7 @@ gsettings set org.gnome.shell.extensions.just-perfection animation 2
 gsettings set org.gnome.shell.extensions.just-perfection dash-app-running true
 gsettings set org.gnome.shell.extensions.just-perfection workspace true
 gsettings set org.gnome.shell.extensions.just-perfection workspace-popup false
+gsettings set org.gnome.shell.extensions.just-perfection top-panel-position 1
 
 # Configure Blur My Shell
 gsettings set org.gnome.shell.extensions.blur-my-shell.appfolder blur false
@@ -60,11 +61,12 @@ gsettings set org.gnome.shell.extensions.space-bar.shortcuts enable-move-to-work
 gsettings set org.gnome.shell.extensions.space-bar.shortcuts open-menu "@as []"
 
 # Configure TopHat
-gsettings set org.gnome.shell.extensions.tophat show-icons false
-gsettings set org.gnome.shell.extensions.tophat show-cpu false
-gsettings set org.gnome.shell.extensions.tophat show-disk false
-gsettings set org.gnome.shell.extensions.tophat show-mem false
+gsettings set org.gnome.shell.extensions.tophat show-icons true
+gsettings set org.gnome.shell.extensions.tophat show-cpu true
+gsettings set org.gnome.shell.extensions.tophat show-disk true
+gsettings set org.gnome.shell.extensions.tophat show-mem true
 gsettings set org.gnome.shell.extensions.tophat network-usage-unit bits
+gsettings set org.gnome.shell.extensions.tophat position-in-panel 'left'
 
 # Configure AlphabeticalAppGrid
 gsettings set org.gnome.shell.extensions.alphabetical-app-grid folder-order-position 'end'
