@@ -23,7 +23,7 @@ return {
 			javascript = { "prettier", lsp_format = "fallback" },
 			typescriptreact = { "prettier", lsp_format = "fallback" },
 			typescript = { "prettier", lsp_format = "fallback" },
-			elixir = { "custom_mix", lsp_format = "fallback" },
+			elixir = { "custom_mix", lsp_format = nil },
 			-- elixir = { "mix", lsp_format = "fallback" },
 			sql = { "pg_format" },
 		},
