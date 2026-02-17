@@ -68,3 +68,22 @@ gsettings set org.gnome.shell.extensions.tophat network-usage-unit bits
 
 # Configure AlphabeticalAppGrid
 gsettings set org.gnome.shell.extensions.alphabetical-app-grid folder-order-position 'end'
+
+# Configure lip behaviour
+gsettings set org.gnome.settings-daemon.plugins.power lid-close-ac-action 'nothing'
+
+# Configure keyborad shortcuts
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>1']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>2']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>3']"
+
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-1 "['<Shift><Super>exclam']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-2 "['<Shift><Super>at']"
+
+gsettings set org.gnome.shell.keybindings show-screenshot-ui "[]"
+
+KEYPATH="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KEYPATH name 'Custom PrintScreen'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KEYPATH command 'flameshot gui'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KEYPATH binding "['Print']"

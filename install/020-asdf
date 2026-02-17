@@ -13,18 +13,18 @@ rm asdf.tar.gz
 ~/.bin/asdf plugin add python
 
 ~/.bin/asdf install erlang latest
-~/.bin/asdf global erlang latest
+~/.bin/asdf set erlang latest
 
 ~/.bin/asdf install elixir latest
-~/.bin/asdf global elixir latest
+~/.bin/asdf set elixir latest
 
 ~/.bin/asdf install rust latest
-~/.bin/asdf global rust latest
+~/.bin/asdf set rust latest
 
 ~/.bin/asdf install nodejs latest
-~/.bin/asdf global nodejs latest
+~/.bin/asdf set nodejs latest
 
 ~/.bin/asdf install python latest
-~/.bin/asdf global python latest
+~/.bin/asdf set python latest
 
 ~/.bin/asdf reshim

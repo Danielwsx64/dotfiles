@@ -2,14 +2,14 @@
     "com.github.kbialek.ulauncher-bitwarden": {
         "id": "com.github.kbialek.ulauncher-bitwarden",
         "url": "https://github.com/kbialek/ulauncher-bitwarden",
-        "updated_at": "2024-08-25T18:00:22.661077",
+        "updated_at": "2026-02-17T14:37:33.111747",
         "last_commit": "a57acb3394ba2d1aaefc743b5bff819a9eb8d619",
         "last_commit_time": "2024-05-08T06:35:12"
     },
     "com.github.iboyperson.ulauncher-system": {
         "id": "com.github.iboyperson.ulauncher-system",
         "url": "https://github.com/iboyperson/ulauncher-system",
-        "updated_at": "2024-12-23T18:38:53.174510",
+        "updated_at": "2026-02-17T14:37:35.161222",
         "last_commit": "7dedd992709fa2297735cddf852404144d4da47c",
         "last_commit_time": "2023-11-14T16:53:20"
     }
