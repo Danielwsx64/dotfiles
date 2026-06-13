@@ -45,3 +45,5 @@ Session.vim
 .sass-cache
 
 .git
+
+**/.claude/settings.local.json
